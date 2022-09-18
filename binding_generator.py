@@ -49,20 +49,18 @@ def generate_bindings(api_filepath, use_template_get_node, output_dir="."):
     source_gen_folder = Path(output_dir) / "src" / "gen"
 
     try:
-        include_gen_folder.mkdir(parents=True)
-    except os.error as e:
-        if e.errno == errno.EEXIST:
-            print(str(source_gen_folder) + ": " + os.strerror(e.errno))
-        else:
-            exit(1)
+        if not (os.path.exists(str(include_gen_folder))):
+            os.makedirs(str(include_gen_folder))
+    except:
+        print(str(include_gen_folder))
+        exit(1)
 
     try:
-        source_gen_folder.mkdir(parents=True)
-    except os.error as e:
-        if e.errno == errno.EEXIST:
-            print(str(source_gen_folder) + ": " + os.strerror(e.errno))
-        else:
-            exit(1)
+        if not (os.path.exists(str(source_gen_folder))):
+            os.makedirs(str(source_gen_folder))
+    except:
+        print(str(source_gen_folder))
+        exit(1)
 
     for c in classes:
         # print(c['name'])
